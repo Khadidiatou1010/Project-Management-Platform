@@ -1,0 +1,71 @@
+---
+title: |
+  
+site: bookdown::bookdown_site
+documentclass: book
+output:
+  bookdown::gitbook:
+    css: style.css
+    toc_depth: 3
+    split_by: chapter
+    config:
+      toc:
+        collapse: section
+      edit: null
+      download: ["pdf"]
+      sharing: no
+---
+
+
+<!-- Centrer les logos et le texte -->
+<div style="text-align: center;">
+
+<!-- Logos -->
+<img src="images/LOGO3.jpg" width="150" style="margin-right: 20px;"> <br>
+<i>Ministère de l'Economie du Plan et de la Coopération</i> <br>
+<img src="images/LOGO2.jpg" width="100" style="margin-right: 20px;"> <br>
+<i>Agence nationale de la Statistique et de la Démographie (ANSD)</i> <br>
+<img src="images/LOGO1.jpg" width="60"> <br>
+<i>Ecole nationale de la Statistique et de l'Analyse économique Pierre Ndiaye (ENSAE)</i> <br>
+<br><br>
+
+<!-- Titre du projet -->
+<p style="font-size: 28px; font-weight: bold; color: blue;">
+Base de données 1
+</p>
+
+
+<p style="font-size: 28px; font-weight: bold; color: blue;">
+Bookdown : Logiciel de Gestion de Projets
+</p>
+
+<img src="images/prflow.png" width="150" style="margin-right: 20px;"> <br>
+
+
+<!-- Informations sur les rédacteurs -->
+<p style="font-size: 18px;">
+<i>Rédigé par :</i> <br>
+<b>Dior Mbengue, Kenrencia Dyvana Seunkam Pahane et</b> <b>Khadidiatou Coulibaly</b> <br>
+<i>Élèves ingénieurs Statisticiens économistes</i>
+</p>
+
+<br>
+
+<!-- Superviseur -->
+<p style="font-size: 18px;">
+<i>Sous la supervision de :</i> <br>
+<b>M. Baye Demba DIACK</b> <br>
+<i>Administrataur de bases de données</i>
+</p>
+
+<br>
+
+<!-- Année scolaire -->
+<p style="font-size: 20px; font-weight: bold;">
+Année scolaire : 2025/2026
+</p>
+
+</div>
+
+<!----------------------------------FIN DE SCRIPT - Page de garde---------------------------------------->
+

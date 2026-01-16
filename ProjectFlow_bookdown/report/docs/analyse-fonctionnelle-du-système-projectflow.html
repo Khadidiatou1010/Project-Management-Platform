@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 3 Analyse fonctionnelle du système — ProjectFlow | ProjectFlow_Rapport</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 3 Analyse fonctionnelle du système — ProjectFlow | ProjectFlow_Rapport" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 3 Analyse fonctionnelle du système — ProjectFlow | ProjectFlow_Rapport" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="le-projet-en-soi.html"/>
+<link rel="next" href="modélisation-complète-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">ProjectFlow — Rapport</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> ProjectFlow</a></li>
+<li class="chapter" data-level="2" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html"><i class="fa fa-check"></i><b>2</b> 🎓 Le projet en soi</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#objectif-général"><i class="fa fa-check"></i><b>2.1</b> 🎯 Objectif général</a></li>
+<li class="chapter" data-level="2.2" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#travail-attendu"><i class="fa fa-check"></i><b>2.2</b> 🧩 Travail attendu</a></li>
+<li class="chapter" data-level="2.3" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#contexte-du-projet"><i class="fa fa-check"></i><b>2.3</b> 📘 Contexte du projet</a></li>
+<li class="chapter" data-level="2.4" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#fonctionnalités-détaillées-à-modéliser"><i class="fa fa-check"></i><b>2.4</b> 🏗️ Fonctionnalités détaillées à modéliser</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#gestion-des-utilisateurs-équipes"><i class="fa fa-check"></i><b>2.4.1</b> 🔹 1. Gestion des utilisateurs / équipes</a></li>
+<li class="chapter" data-level="2.4.2" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#gestion-des-projets"><i class="fa fa-check"></i><b>2.4.2</b> 🔹 2. Gestion des projets</a></li>
+<li class="chapter" data-level="2.4.3" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#gestion-des-tâches"><i class="fa fa-check"></i><b>2.4.3</b> 🔹 3. Gestion des tâches</a></li>
+<li class="chapter" data-level="2.4.4" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#gestion-des-activités-logs"><i class="fa fa-check"></i><b>2.4.4</b> 🔹 4. Gestion des activités (logs)</a></li>
+<li class="chapter" data-level="2.4.5" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#gestion-des-documents"><i class="fa fa-check"></i><b>2.4.5</b> 🔹 5. Gestion des documents</a></li>
+<li class="chapter" data-level="2.4.6" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#notifications-optionnel-mais-recommandé"><i class="fa fa-check"></i><b>2.4.6</b> 🔹 6. Notifications (optionnel mais recommandé)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#livrables-demandés"><i class="fa fa-check"></i><b>2.5</b> 📑 Livrables demandés</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#analyse-fonctionnelle"><i class="fa fa-check"></i><b>2.5.1</b> ✏️ 1. Analyse fonctionnelle</a></li>
+<li class="chapter" data-level="2.5.2" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#modélisation-complète"><i class="fa fa-check"></i><b>2.5.2</b> 📊 2. Modélisation complète</a></li>
+<li class="chapter" data-level="2.5.3" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#dictionnaire-des-données"><i class="fa fa-check"></i><b>2.5.3</b> 📘 3. Dictionnaire des données</a></li>
+<li class="chapter" data-level="2.5.4" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#jeux-de-requêtes-à-rédiger"><i class="fa fa-check"></i><b>2.5.4</b> 🧪 4. Jeux de requêtes à rédiger</a></li>
+<li class="chapter" data-level="2.5.5" data-path="le-projet-en-soi.html"><a href="le-projet-en-soi.html#propositions-damélioration-du-modèle"><i class="fa fa-check"></i><b>2.5.5</b> 🚀 5. Propositions d’amélioration du modèle</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html"><i class="fa fa-check"></i><b>3</b> Analyse fonctionnelle du système — ProjectFlow</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#contexte"><i class="fa fa-check"></i><b>3.1</b> Contexte</a></li>
+<li class="chapter" data-level="3.2" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#acteurs"><i class="fa fa-check"></i><b>3.2</b> Acteurs</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#administrateur"><i class="fa fa-check"></i><b>3.2.1</b> Administrateur</a></li>
+<li class="chapter" data-level="3.2.2" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#chef-de-projet"><i class="fa fa-check"></i><b>3.2.2</b> Chef de projet</a></li>
+<li class="chapter" data-level="3.2.3" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#membre-déquipe"><i class="fa fa-check"></i><b>3.2.3</b> Membre d’équipe</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#fonctionnalités"><i class="fa fa-check"></i><b>3.3</b> 3. Fonctionnalités</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#gestion-des-utilisateurs-et-des-équipes"><i class="fa fa-check"></i><b>3.3.1</b> Gestion des utilisateurs et des équipes</a></li>
+<li class="chapter" data-level="3.3.2" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#gestion-des-projets-1"><i class="fa fa-check"></i><b>3.3.2</b> Gestion des projets</a></li>
+<li class="chapter" data-level="3.3.3" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#gestion-des-tâches-1"><i class="fa fa-check"></i><b>3.3.3</b> Gestion des tâches</a></li>
+<li class="chapter" data-level="3.3.4" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#gestion-des-activités-logs-1"><i class="fa fa-check"></i><b>3.3.4</b> Gestion des activités (logs)</a></li>
+<li class="chapter" data-level="3.3.5" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#gestion-des-documents-1"><i class="fa fa-check"></i><b>3.3.5</b> Gestion des documents</a></li>
+<li class="chapter" data-level="3.3.6" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#notifications-optionnel"><i class="fa fa-check"></i><b>3.3.6</b> Notifications (optionnel)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#règles-de-gestion"><i class="fa fa-check"></i><b>3.4</b> Règles de gestion</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-aux-utilisateurs"><i class="fa fa-check"></i><b>3.4.1</b> Règles liées aux utilisateurs</a></li>
+<li class="chapter" data-level="3.4.2" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-aux-équipes"><i class="fa fa-check"></i><b>3.4.2</b> Règles liées aux équipes</a></li>
+<li class="chapter" data-level="3.4.3" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-aux-projets"><i class="fa fa-check"></i><b>3.4.3</b> Règles liées aux projets</a></li>
+<li class="chapter" data-level="3.4.4" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-aux-tâches"><i class="fa fa-check"></i><b>3.4.4</b> Règles liées aux tâches</a></li>
+<li class="chapter" data-level="3.4.5" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-à-lassignation-des-tâches"><i class="fa fa-check"></i><b>3.4.5</b> Règles liées à l’assignation des tâches</a></li>
+<li class="chapter" data-level="3.4.6" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-aux-activités-logs"><i class="fa fa-check"></i><b>3.4.6</b> Règles liées aux activités (logs)</a></li>
+<li class="chapter" data-level="3.4.7" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-aux-documents"><i class="fa fa-check"></i><b>3.4.7</b> Règles liées aux documents</a></li>
+<li class="chapter" data-level="3.4.8" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-aux-notifications"><i class="fa fa-check"></i><b>3.4.8</b> Règles liées aux notifications</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#exigences-non-fonctionnelles"><i class="fa fa-check"></i><b>3.5</b> Exigences non fonctionnelles</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#sécurité"><i class="fa fa-check"></i><b>3.5.1</b> Sécurité</a></li>
+<li class="chapter" data-level="3.5.2" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#traçabilité"><i class="fa fa-check"></i><b>3.5.2</b> Traçabilité</a></li>
+<li class="chapter" data-level="3.5.3" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#collaboration"><i class="fa fa-check"></i><b>3.5.3</b> Collaboration</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#diagramme-de-contexte-description"><i class="fa fa-check"></i><b>3.6</b> Diagramme de contexte (description)</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#interactions-principales-lecture-claire"><i class="fa fa-check"></i><b>3.6.1</b> Interactions principales (lecture claire)</a></li>
+<li class="chapter" data-level="3.6.2" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#shématisation"><i class="fa fa-check"></i><b>3.6.2</b> Shématisation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#uses-cases-scénarios-dutilisation"><i class="fa fa-check"></i><b>3.7</b> Uses cases (Scénarios d’utilisation)</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#acteur-administrateur"><i class="fa fa-check"></i><b>3.7.1</b> Acteur : Administrateur</a></li>
+<li class="chapter" data-level="3.7.2" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#acteur-chef-de-projet"><i class="fa fa-check"></i><b>3.7.2</b> Acteur : Chef de projet</a></li>
+<li class="chapter" data-level="3.7.3" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#membre-déquipe-1"><i class="fa fa-check"></i><b>3.7.3</b> Membre d’équipe</a></li>
+<li class="chapter" data-level="3.7.4" data-path="analyse-fonctionnelle-du-système-projectflow.html"><a href="analyse-fonctionnelle-du-système-projectflow.html#use-cases-transverses-système"><i class="fa fa-check"></i><b>3.7.4</b> Use cases transverses (système)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html"><i class="fa fa-check"></i><b>4</b> Modélisation complète</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html#modèle-conceptuel-de-données-mcd"><i class="fa fa-check"></i><b>4.1</b> Modèle Conceptuel de Données (MCD)</a></li>
+<li class="chapter" data-level="4.2" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html#modèle-logique-de-données-mld"><i class="fa fa-check"></i><b>4.2</b> Modèle Logique de Données (MLD)</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html#schéma-du-mld"><i class="fa fa-check"></i><b>4.2.1</b> Schéma du MLD</a></li>
+<li class="chapter" data-level="4.2.2" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html#mld-sous-forme-textuelle"><i class="fa fa-check"></i><b>4.2.2</b> MLD sous forme textuelle</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html#modèle-physique-de-données-mpd"><i class="fa fa-check"></i><b>4.3</b> Modèle Physique de Données (MPD)</a></li>
+<li class="chapter" data-level="4.4" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html#table-activite"><i class="fa fa-check"></i><b>4.4</b> Table <code>ACTIVITE</code></a></li>
+<li class="chapter" data-level="4.5" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html#table-appartenir"><i class="fa fa-check"></i><b>4.5</b> Table <code>APPARTENIR</code></a></li>
+<li class="chapter" data-level="4.6" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html#table-assigner"><i class="fa fa-check"></i><b>4.6</b> Table <code>ASSIGNER</code></a></li>
+<li class="chapter" data-level="4.7" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html#table-document"><i class="fa fa-check"></i><b>4.7</b> Table <code>DOCUMENT</code></a></li>
+<li class="chapter" data-level="4.8" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html#table-equipe"><i class="fa fa-check"></i><b>4.8</b> Table <code>EQUIPE</code></a></li>
+<li class="chapter" data-level="4.9" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html#table-notification"><i class="fa fa-check"></i><b>4.9</b> Table <code>NOTIFICATION</code></a></li>
+<li class="chapter" data-level="4.10" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html#table-projet"><i class="fa fa-check"></i><b>4.10</b> Table <code>PROJET</code></a></li>
+<li class="chapter" data-level="4.11" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html#table-tache"><i class="fa fa-check"></i><b>4.11</b> Table <code>TACHE</code></a></li>
+<li class="chapter" data-level="4.12" data-path="modélisation-complète-1.html"><a href="modélisation-complète-1.html#table-utilisateur"><i class="fa fa-check"></i><b>4.12</b> Table <code>UTILISATEUR</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="dictionnaire-des-données-1.html"><a href="dictionnaire-des-données-1.html"><i class="fa fa-check"></i><b>5</b> Dictionnaire des données</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="dictionnaire-des-données-1.html"><a href="dictionnaire-des-données-1.html#entité-utilisateur"><i class="fa fa-check"></i><b>5.1</b> Entité <code>UTILISATEUR</code></a></li>
+<li class="chapter" data-level="5.2" data-path="dictionnaire-des-données-1.html"><a href="dictionnaire-des-données-1.html#entité-equipe"><i class="fa fa-check"></i><b>5.2</b> Entité <code>EQUIPE</code></a></li>
+<li class="chapter" data-level="5.3" data-path="dictionnaire-des-données-1.html"><a href="dictionnaire-des-données-1.html#entité-appartenir"><i class="fa fa-check"></i><b>5.3</b> Entité <code>APPARTENIR</code></a></li>
+<li class="chapter" data-level="5.4" data-path="dictionnaire-des-données-1.html"><a href="dictionnaire-des-données-1.html#entité-projet"><i class="fa fa-check"></i><b>5.4</b> Entité <code>PROJET</code></a></li>
+<li class="chapter" data-level="5.5" data-path="dictionnaire-des-données-1.html"><a href="dictionnaire-des-données-1.html#entité-tache"><i class="fa fa-check"></i><b>5.5</b> Entité <code>TACHE</code></a></li>
+<li class="chapter" data-level="5.6" data-path="dictionnaire-des-données-1.html"><a href="dictionnaire-des-données-1.html#entité-assigner"><i class="fa fa-check"></i><b>5.6</b> Entité <code>ASSIGNER</code></a></li>
+<li class="chapter" data-level="5.7" data-path="dictionnaire-des-données-1.html"><a href="dictionnaire-des-données-1.html#entité-activite"><i class="fa fa-check"></i><b>5.7</b> Entité <code>ACTIVITE</code></a></li>
+<li class="chapter" data-level="5.8" data-path="dictionnaire-des-données-1.html"><a href="dictionnaire-des-données-1.html#entité-document"><i class="fa fa-check"></i><b>5.8</b> Entité <code>DOCUMENT</code></a></li>
+<li class="chapter" data-level="5.9" data-path="dictionnaire-des-données-1.html"><a href="dictionnaire-des-données-1.html#entité-notification"><i class="fa fa-check"></i><b>5.9</b> Entité <code>NOTIFICATION</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="contraintes-dintégrité.html"><a href="contraintes-dintégrité.html"><i class="fa fa-check"></i><b>6</b> Contraintes d’intégrité</a></li>
+<li class="chapter" data-level="7" data-path="implémentation-sql-ddl-mysql.html"><a href="implémentation-sql-ddl-mysql.html"><i class="fa fa-check"></i><b>7</b> Implémentation SQL (DDL MySQL)</a></li>
+<li class="chapter" data-level="8" data-path="requêtes-sql-dexploitation.html"><a href="requêtes-sql-dexploitation.html"><i class="fa fa-check"></i><b>8</b> Requêtes SQL d’exploitation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="requêtes-sql-dexploitation.html"><a href="requêtes-sql-dexploitation.html#requêtes-simples"><i class="fa fa-check"></i><b>8.1</b> 10 requêtes simples</a></li>
+<li class="chapter" data-level="8.2" data-path="requêtes-sql-dexploitation.html"><a href="requêtes-sql-dexploitation.html#requêtes-intermédiaires"><i class="fa fa-check"></i><b>8.2</b> 10 requêtes intermédiaires</a></li>
+<li class="chapter" data-level="8.3" data-path="requêtes-sql-dexploitation.html"><a href="requêtes-sql-dexploitation.html#requêtes-avancées"><i class="fa fa-check"></i><b>8.3</b> 10 requêtes avancées</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="requêtes-sql-dexploitation-1.html"><a href="requêtes-sql-dexploitation-1.html"><i class="fa fa-check"></i><b>9</b> Requêtes SQL d’exploitation</a></li>
+<li class="chapter" data-level="10" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>10</b> Annexes</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="annexes.html"><a href="annexes.html#a.-insertion-dimages-sans-afficher-de-code"><i class="fa fa-check"></i><b>10.1</b> A. Insertion d’images (sans afficher de code)</a></li>
+<li class="chapter" data-level="10.2" data-path="annexes.html"><a href="annexes.html#b.-génération-du-livre"><i class="fa fa-check"></i><b>10.2</b> B. Génération du livre</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analyse-fonctionnelle-du-système-projectflow" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapitre 3</span> Analyse fonctionnelle du système — ProjectFlow<a href="analyse-fonctionnelle-du-système-projectflow.html#analyse-fonctionnelle-du-système-projectflow" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="contexte" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Contexte<a href="analyse-fonctionnelle-du-système-projectflow.html#contexte" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Plusieurs institutions publiques et organisations non gouvernementales souhaitent centraliser la gestion de leurs projets, actuellement dispersée entre fichiers Excel, échanges informels et outils hétérogènes. Cette fragmentation entraîne des retards, des doublons d’information et une visibilité limitée sur l’avancement réel des actions menées.</p>
+<p>Face à ces limites, la mise en place d’une plateforme nationale unique apparaît comme une nécessité stratégique. Celle-ci doit offrir un espace collaboratif, sécurisé et structuré permettant de suivre en temps réel les projets, les tâches, les équipes, les documents et les interactions associées.</p>
+<p>L’objectif global de cette plateforme est d’harmoniser les pratiques de gestion, de faciliter la coordination entre les différentes organisations et de garantir un pilotage fiable des projets de développement. Elle a vocation à devenir un référentiel commun soutenant la prise de décision et améliorant l’efficacité collective.</p>
+<hr />
+</div>
+<div id="acteurs" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Acteurs<a href="analyse-fonctionnelle-du-système-projectflow.html#acteurs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="administrateur" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Administrateur<a href="analyse-fonctionnelle-du-système-projectflow.html#administrateur" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’administrateur supervise l’ensemble de la plateforme et veille à son bon fonctionnement. Il gère les comptes utilisateurs, leurs rôles ainsi que les équipes. Il dispose d’une visibilité globale sur tous les projets et peut intervenir en cas de problème d’organisation ou de droits d’accès.</p>
+</div>
+<div id="chef-de-projet" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Chef de projet<a href="analyse-fonctionnelle-du-système-projectflow.html#chef-de-projet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le chef de projet est responsable de la planification, de la coordination et du suivi des projets relevant de son équipe. Il crée les projets, organise les tâches et répartit le travail entre les membres. Il suit l’avancement des activités, ajuste les priorités et anime la collaboration au sein de l’équipe.</p>
+</div>
+<div id="membre-déquipe" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Membre d’équipe<a href="analyse-fonctionnelle-du-système-projectflow.html#membre-déquipe" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le membre d’équipe participe directement à la réalisation des tâches qui lui sont attribuées. Il met à jour l’état d’avancement de ses tâches, échange avec les autres utilisateurs via les commentaires et consulte les informations relatives aux projets. Son rôle est d’exécuter les activités opérationnelles et de contribuer au bon déroulement des projets.</p>
+<hr />
+</div>
+</div>
+<div id="fonctionnalités" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> 3. Fonctionnalités<a href="analyse-fonctionnelle-du-système-projectflow.html#fonctionnalités" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="gestion-des-utilisateurs-et-des-équipes" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Gestion des utilisateurs et des équipes<a href="analyse-fonctionnelle-du-système-projectflow.html#gestion-des-utilisateurs-et-des-équipes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La plateforme permet de créer des utilisateurs, de définir leurs rôles et de les organiser au sein d’équipes. Chaque utilisateur appartient à au moins une équipe, ce qui structure la collaboration et la répartition du travail. L’administrateur contrôle les accès et veille à ce que chaque équipe dispose des membres nécessaires.</p>
+</div>
+<div id="gestion-des-projets-1" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Gestion des projets<a href="analyse-fonctionnelle-du-système-projectflow.html#gestion-des-projets-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La gestion des projets permet de créer, modifier et suivre les projets d’une équipe. Chaque projet est associé à une seule équipe et contient des informations essentielles telles que le budget, les dates et le statut. Le chef de projet peut y associer plusieurs utilisateurs afin d’assurer le pilotage et la réalisation des activités.</p>
+</div>
+<div id="gestion-des-tâches-1" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Gestion des tâches<a href="analyse-fonctionnelle-du-système-projectflow.html#gestion-des-tâches-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le système permet de créer des tâches, de définir leurs priorités et de les assigner à un ou plusieurs membres. Chaque tâche est obligatoirement rattachée à un projet et possède un statut ainsi qu’un pourcentage d’avancement. Une tâche peut également rester non assignée lorsqu’elle est placée en backlog.</p>
+</div>
+<div id="gestion-des-activités-logs-1" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Gestion des activités (logs)<a href="analyse-fonctionnelle-du-système-projectflow.html#gestion-des-activités-logs-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Chaque action réalisée sur une tâche génère automatiquement une activité, telle qu’un commentaire, un changement de statut ou une réassignation. Ces activités permettent de conserver un historique complet et horodaté des actions effectuées. Elles assurent la traçabilité et facilitent le suivi du travail.</p>
+</div>
+<div id="gestion-des-documents-1" class="section level3 hasAnchor" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> Gestion des documents<a href="analyse-fonctionnelle-du-système-projectflow.html#gestion-des-documents-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La plateforme permet d’ajouter des documents associés aux projets ou aux tâches. Chaque document est caractérisé par un auteur, une date d’upload et un type, et doit être rattaché soit à un projet, soit à une tâche. Cette règle garantit une organisation claire des fichiers et évite les documents non référencés.</p>
+</div>
+<div id="notifications-optionnel" class="section level3 hasAnchor" number="3.3.6">
+<h3><span class="header-section-number">3.3.6</span> Notifications (optionnel)<a href="analyse-fonctionnelle-du-système-projectflow.html#notifications-optionnel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le système peut générer des notifications lorsqu’un événement important survient, tel que la création d’une nouvelle tâche ou l’ajout d’un commentaire. Chaque notification est destinée à un utilisateur spécifique et peut être marquée comme lue ou non lue. Ce mécanisme permet aux membres de rester informés en temps réel.</p>
+<hr />
+</div>
+</div>
+<div id="règles-de-gestion" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Règles de gestion<a href="analyse-fonctionnelle-du-système-projectflow.html#règles-de-gestion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Les règles de gestion suivantes définissent les principes de fonctionnement de la plateforme et encadrent l’utilisation des différents objets du système.</p>
+<div id="règles-liées-aux-utilisateurs" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Règles liées aux utilisateurs<a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-aux-utilisateurs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>RG1</strong> : Chaque utilisateur est identifié de manière unique dans le système.<br />
+</li>
+<li><strong>RG2</strong> : Un utilisateur possède un nom, un prénom, un email et un rôle.<br />
+</li>
+<li><strong>RG3</strong> : Un utilisateur peut avoir un rôle parmi : Administrateur, Chef de projet ou Membre.<br />
+</li>
+<li><strong>RG4</strong> : La date d’inscription d’un utilisateur est enregistrée.</li>
+</ul>
+</div>
+<div id="règles-liées-aux-équipes" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Règles liées aux équipes<a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-aux-équipes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>RG5</strong> : Chaque équipe est identifiée de manière unique.<br />
+</li>
+<li><strong>RG6</strong> : Une équipe possède un nom, une description et une date de création.<br />
+</li>
+<li><strong>RG7</strong> : Une équipe regroupe un ou plusieurs utilisateurs.<br />
+</li>
+<li><strong>RG8</strong> : Un utilisateur peut appartenir à une ou plusieurs équipes.<br />
+</li>
+<li><strong>RG9</strong> : L’appartenance d’un utilisateur à une équipe est caractérisée par une date d’affectation.</li>
+</ul>
+</div>
+<div id="règles-liées-aux-projets" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Règles liées aux projets<a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-aux-projets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>RG10</strong> : Chaque projet est identifié de manière unique.<br />
+</li>
+<li><strong>RG11</strong> : Un projet possède un titre, une description, des dates, un budget, un statut et une priorité.<br />
+</li>
+<li><strong>RG12</strong> : Chaque projet est géré par une seule équipe.<br />
+</li>
+<li><strong>RG13</strong> : Une équipe peut gérer un ou plusieurs projets.</li>
+</ul>
+</div>
+<div id="règles-liées-aux-tâches" class="section level3 hasAnchor" number="3.4.4">
+<h3><span class="header-section-number">3.4.4</span> Règles liées aux tâches<a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-aux-tâches" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>RG14</strong> : Chaque tâche est identifiée de manière unique.<br />
+</li>
+<li><strong>RG15</strong> : Une tâche possède un titre, une description, des dates prévues, une priorité et un pourcentage d’avancement.<br />
+</li>
+<li><strong>RG16</strong> : Chaque tâche appartient obligatoirement à un seul projet.<br />
+</li>
+<li><strong>RG17</strong> : Un projet peut contenir zéro, une ou plusieurs tâches.</li>
+</ul>
+</div>
+<div id="règles-liées-à-lassignation-des-tâches" class="section level3 hasAnchor" number="3.4.5">
+<h3><span class="header-section-number">3.4.5</span> Règles liées à l’assignation des tâches<a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-à-lassignation-des-tâches" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>RG18</strong> : Une tâche peut être assignée à zéro, un ou plusieurs utilisateurs.<br />
+</li>
+<li><strong>RG19</strong> : Un utilisateur peut être assigné à zéro, une ou plusieurs tâches.<br />
+</li>
+<li><strong>RG20</strong> : L’assignation d’un utilisateur à une tâche est caractérisée par une date d’affectation et un rôle dans la tâche.</li>
+</ul>
+</div>
+<div id="règles-liées-aux-activités-logs" class="section level3 hasAnchor" number="3.4.6">
+<h3><span class="header-section-number">3.4.6</span> Règles liées aux activités (logs)<a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-aux-activités-logs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>RG21</strong> : Chaque activité est identifiée de manière unique.<br />
+</li>
+<li><strong>RG22</strong> : Une activité possède un contenu, une date/heure et un type.<br />
+</li>
+<li><strong>RG23</strong> : Une activité est réalisée par un seul utilisateur.<br />
+</li>
+<li><strong>RG24</strong> : Une activité est associée à une seule tâche.<br />
+</li>
+<li><strong>RG25</strong> : Une tâche peut générer zéro, une ou plusieurs activités.</li>
+</ul>
+</div>
+<div id="règles-liées-aux-documents" class="section level3 hasAnchor" number="3.4.7">
+<h3><span class="header-section-number">3.4.7</span> Règles liées aux documents<a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-aux-documents" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>RG26</strong> : Chaque document est identifié de manière unique.<br />
+</li>
+<li><strong>RG27</strong> : Un document possède un nom, un type, une date d’upload et un chemin de fichier.</li>
+<li><strong>RG28</strong> : Un document est ajouté par un utilisateur.<br />
+</li>
+<li><strong>RG29</strong> : Un document est rattaché soit à un projet, soit à une tâche, mais jamais aux deux simultanément.<br />
+</li>
+<li><strong>RG30</strong> : Un projet ou une tâche peut avoir zéro, un ou plusieurs documents.</li>
+</ul>
+</div>
+<div id="règles-liées-aux-notifications" class="section level3 hasAnchor" number="3.4.8">
+<h3><span class="header-section-number">3.4.8</span> Règles liées aux notifications<a href="analyse-fonctionnelle-du-système-projectflow.html#règles-liées-aux-notifications" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>RG31</strong> : Chaque notification est identifiée de manière unique.<br />
+</li>
+<li><strong>RG32</strong> : Une notification possède un message, un type, un statut et une date/heure.<br />
+</li>
+<li><strong>RG33</strong> : Une notification est reçue par un seul utilisateur.<br />
+</li>
+<li><strong>RG34</strong> : Un utilisateur peut recevoir zéro, une ou plusieurs notifications.</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="exigences-non-fonctionnelles" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Exigences non fonctionnelles<a href="analyse-fonctionnelle-du-système-projectflow.html#exigences-non-fonctionnelles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="sécurité" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Sécurité<a href="analyse-fonctionnelle-du-système-projectflow.html#sécurité" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’accès à la plateforme est contrôlé par des rôles et par l’appartenance aux équipes et aux projets. Les utilisateurs ne peuvent consulter ou modifier que les informations auxquelles ils sont autorisés.</p>
+</div>
+<div id="traçabilité" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Traçabilité<a href="analyse-fonctionnelle-du-système-projectflow.html#traçabilité" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Toutes les actions importantes réalisées sur les tâches sont enregistrées dans un historique. Chaque action est associée à un utilisateur et à une date afin d’assurer le suivi et la responsabilité des interventions.</p>
+</div>
+<div id="collaboration" class="section level3 hasAnchor" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Collaboration<a href="analyse-fonctionnelle-du-système-projectflow.html#collaboration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La plateforme doit permettre à plusieurs utilisateurs de travailler simultanément sur un même projet. Les membres peuvent échanger via des commentaires et suivre l’évolution des tâches en temps réel.</p>
+<hr />
+</div>
+</div>
+<div id="diagramme-de-contexte-description" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Diagramme de contexte (description)<a href="analyse-fonctionnelle-du-système-projectflow.html#diagramme-de-contexte-description" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Le diagramme de contexte présente la plateforme de gestion de projets comme un système central en interaction avec trois acteurs principaux : l’administrateur, le chef de projet et le membre d’équipe.</p>
+<p>Ces acteurs échangent avec le système pour créer, consulter et mettre à jour des informations relatives aux projets, aux tâches, aux documents et aux activités. La plateforme centralise l’ensemble de ces échanges et garantit un accès contrôlé selon les rôles et les droits des utilisateurs.</p>
+<div id="interactions-principales-lecture-claire" class="section level3 hasAnchor" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Interactions principales (lecture claire)<a href="analyse-fonctionnelle-du-système-projectflow.html#interactions-principales-lecture-claire" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>Chef de projet</strong> : consulter projets, créer projet, créer/assigner tâches, suivre avancement</li>
+<li><strong>Membre d’équipe</strong> : consulter projets/tâches, mettre à jour tâches, commenter</li>
+<li><strong>Administrateur</strong> : gérer utilisateurs, gérer accès, gérer projets (vision globale / administration)</li>
+</ul>
+</div>
+<div id="shématisation" class="section level3 hasAnchor" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Shématisation<a href="analyse-fonctionnelle-du-système-projectflow.html#shématisation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="images/diagram.png" width="903" /></p>
+<hr />
+</div>
+</div>
+<div id="uses-cases-scénarios-dutilisation" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> Uses cases (Scénarios d’utilisation)<a href="analyse-fonctionnelle-du-système-projectflow.html#uses-cases-scénarios-dutilisation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Cette partie présente les scénarios d’utilisation (use cases) de la plateforme de gestion des projets, tâches et activités. Les use cases décrivent, de manière concrète, les différentes interactions possibles entre les acteurs du système et la plateforme, en fonction de leurs rôles et responsabilités.
+Ils permettent de traduire les besoins fonctionnels en situations réelles d’utilisation, et constituent une base essentielle pour la compréhension du fonctionnement global du système ainsi que pour la modélisation de la base de données.</p>
+<div id="acteur-administrateur" class="section level3 hasAnchor" number="3.7.1">
+<h3><span class="header-section-number">3.7.1</span> Acteur : Administrateur<a href="analyse-fonctionnelle-du-système-projectflow.html#acteur-administrateur" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>UC1 : Créer un utilisateur</li>
+</ul>
+<p>L’administrateur crée un nouvel utilisateur en renseignant ses informations personnelles (nom, prénom, email, téléphone) et en lui attribuant un rôle. L’utilisateur est ensuite enregistré dans le système et peut accéder à la plateforme selon ses droits.</p>
+<ul>
+<li>UC2 : Modifier les informations d’un utilisateur</li>
+</ul>
+<p>L’administrateur met à jour les informations d’un utilisateur existant (rôle, coordonnées, statut). Les modifications sont immédiatement prises en compte par le système.
+-UC3 : Créer une équipe</p>
+<p>L’administrateur crée une nouvelle équipe en renseignant son nom et sa description. L’équipe devient disponible pour la gestion des projets.</p>
+<p>-UC4 : Ajouter un utilisateur à une équipe</p>
+<p>L’administrateur affecte un ou plusieurs utilisateurs à une équipe donnée. La date d’affectation est enregistrée afin de tracer l’appartenance à l’équipe.</p>
+<p>-UC5 : Gérer les droits et accès</p>
+<p>L’administrateur contrôle les droits d’accès des utilisateurs en fonction de leur rôle et de leur appartenance aux équipes. Il peut intervenir en cas de problème d’accès ou d’organisation.</p>
+</div>
+<div id="acteur-chef-de-projet" class="section level3 hasAnchor" number="3.7.2">
+<h3><span class="header-section-number">3.7.2</span> Acteur : Chef de projet<a href="analyse-fonctionnelle-du-système-projectflow.html#acteur-chef-de-projet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>UC6 : Créer un projet</li>
+</ul>
+<p>Le chef de projet crée un nouveau projet en renseignant le titre, la description, le budget, les dates prévues, la priorité et le statut. Le projet est automatiquement rattaché à une équipe.</p>
+<ul>
+<li>UC7 : Modifier un projet</li>
+</ul>
+<p>Le chef de projet met à jour les informations d’un projet existant (statut, dates, budget ou priorité).
+Les changements sont visibles par les membres autorisés.</p>
+<ul>
+<li>UC8 : Ajouter des membres à un projet</li>
+</ul>
+<p>Le chef de projet associe un ou plusieurs utilisateurs à un projet afin de constituer l’équipe projet.
+Les utilisateurs ajoutés peuvent consulter et intervenir sur le projet.</p>
+<ul>
+<li>UC9 : Créer une tâche</li>
+</ul>
+<p>Le chef de projet crée une tâche liée à un projet en renseignant son titre, sa description, ses dates prévues et sa priorité. La tâche est enregistrée avec un statut initial.</p>
+<ul>
+<li>UC10 : Assigner une tâche</li>
+</ul>
+<p>Le chef de projet assigne une tâche à un ou plusieurs utilisateurs. Une tâche peut également rester non assignée lorsqu’elle est placée en backlog.</p>
+<ul>
+<li>UC11 : Modifier le statut d’une tâche</li>
+</ul>
+<p>Le chef de projet modifie le statut d’une tâche (à faire, en cours, bloquée, terminée).
+Cette action génère automatiquement une activité.</p>
+<ul>
+<li>UC12 : Suivre l’avancement du projet</li>
+</ul>
+<p>Le chef de projet consulte l’avancement global du projet à travers les tâches et leurs pourcentages d’avancement. Il peut ajuster les priorités si nécessaire.</p>
+</div>
+<div id="membre-déquipe-1" class="section level3 hasAnchor" number="3.7.3">
+<h3><span class="header-section-number">3.7.3</span> Membre d’équipe<a href="analyse-fonctionnelle-du-système-projectflow.html#membre-déquipe-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>UC13 : Consulter les projets</li>
+</ul>
+<p>Le membre d’équipe consulte la liste des projets auxquels il est associé. Il accède aux informations générales et à l’état d’avancement.</p>
+<ul>
+<li>UC14 : Consulter les tâches</li>
+</ul>
+<p>Le membre d’équipe consulte les tâches qui lui sont assignées ainsi que celles du projet. Il peut visualiser leur statut et leurs échéances.</p>
+<ul>
+<li>UC15 : Mettre à jour l’avancement d’une tâche</li>
+</ul>
+<p>Le membre d’équipe met à jour le pourcentage d’avancement et le statut d’une tâche. Cette mise à jour est enregistrée et génère une activité.</p>
+<ul>
+<li>UC16 : Ajouter un commentaire</li>
+</ul>
+<p>Le membre d’équipe ajoute un commentaire sur une tâche afin d’échanger avec les autres membres.
+Le commentaire est enregistré dans l’historique des activités.</p>
+<ul>
+<li>UC17 : Ajouter un document</li>
+</ul>
+<p>Un utilisateur ajoute un document à un projet ou à une tâche. Le document est enregistré avec son auteur et sa date d’upload.</p>
+</div>
+<div id="use-cases-transverses-système" class="section level3 hasAnchor" number="3.7.4">
+<h3><span class="header-section-number">3.7.4</span> Use cases transverses (système)<a href="analyse-fonctionnelle-du-système-projectflow.html#use-cases-transverses-système" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>UC18 : Génération d’une activité (log)</li>
+</ul>
+<p>Le système génère automatiquement une activité lors de toute action importante sur une tâche (commentaire, changement de statut, ajout de document). Chaque activité est horodatée et associée à un utilisateur.</p>
+<ul>
+<li>UC19 : Envoi d’une notification</li>
+</ul>
+<p>Le système envoie une notification à un utilisateur lors d’un événement important (création de tâche, commentaire, changement de statut). La notification peut être marquée comme lue ou non lue.</p>
+<ul>
+<li>UC20 : Consultation de l’historique</li>
+</ul>
+<p>Un utilisateur consulte l’historique des activités d’une tâche afin de suivre les actions réalisées et les échanges associés.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="le-projet-en-soi.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modélisation-complète-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": false,
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": null,
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["ProjectFlow_Rapport.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
