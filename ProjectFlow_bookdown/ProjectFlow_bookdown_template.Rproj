@@ -13,4 +13,3 @@ RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
 BuildType: Website
-WebsitePath: C:/Users/DELL/Documents/ISE2/SEM 1/BDD/Projet/ProjectFlow_bookdown_template/report

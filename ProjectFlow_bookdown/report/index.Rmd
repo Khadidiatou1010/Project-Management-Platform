@@ -1,6 +1,6 @@
 ---
-title: |
-  
+title: "ProjectFlow"
+book_filename: "ProjectFlow"
 site: bookdown::bookdown_site
 documentclass: book
 output:
@@ -15,6 +15,7 @@ output:
       download: ["pdf"]
       sharing: no
 ---
+
 
 
 <!-- Centrer les logos et le texte -->
@@ -55,7 +56,7 @@ Bookdown : Logiciel de Gestion de Projets
 <p style="font-size: 18px;">
 <i>Sous la supervision de :</i> <br>
 <b>M. Baye Demba DIACK</b> <br>
-<i>Administrataur de bases de données</i>
+<i>Administrateur de bases de données</i>
 </p>
 
 <br>
@@ -67,5 +68,5 @@ Année scolaire : 2025/2026
 
 </div>
 
-<!----------------------------------FIN DE SCRIPT - Page de garde---------------------------------------->
+<!----------------------------------FIN DE SCRIPT - Page de garde ---------------------------------------->
 

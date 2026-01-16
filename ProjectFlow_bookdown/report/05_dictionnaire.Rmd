@@ -3,167 +3,189 @@
 
 Le **dictionnaire des données** est un **document explicatif** (souvent un tableau Word/Excel) qui décrit chaque champ du MPD : sa signification métier, son type, s’il est obligatoire, ses valeurs possibles (domaines/énumérations), ses contraintes, ses liens (FK), et parfois des exemples. Il ne remplace pas les modèles : il sert à rendre le schéma **compréhensible et réplicable** par d’autres (développeurs, analystes, nouveaux membres de l’équipe).
 
-
 ## Entité `UTILISATEUR`
 
-**Description :** Représente une personne utilisant la plateforme (admin, chef de projet ou membre).
+**Description :** Personne utilisant la plateforme (admin, chef de projet ou membre).
 
 **Règles & contraintes clés :**
-- Clé primaire : `id_utilisateur`.
-- Unicité : `email_utilisateur`.
-- Règles : email unique ; rôle dans {ADMIN, CHEF_PROJET, MEMBRE}.
+- **PK** : `id_utilisateur` (AUTO_INCREMENT)
+- **UNIQUE** : `email_utilisateur`
+- **CHECK** : `role_utilisateur` ∈ {`ADMIN`, `CHEF_PROJET`, `MEMBRE`}
 
-| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Nullable | Exemple |
-|---|---|---|---|---|---|---|---|
-| id_utilisateur | Identifiant unique de l’utilisateur. | INT | Entier |  | PK | Oui |  |
-| nom_utilisateur | Nom de famille. | VARCHAR(50) | Texte libre (max 50 caractères) | NOT NULL |  | Non |  |
-| prenom_utilisateur | Prénom. | VARCHAR(50) | Texte libre (max 50 caractères) | NOT NULL |  | Non |  |
-| email_utilisateur | Adresse email (unique). | VARCHAR(50) | Texte libre (max 50 caractères) | NOT NULL; UNIQUE |  | Non | dior.ndiaye@example.sn |
-| telephone_utilisateur | Numéro de téléphone (format libre). | VARCHAR(50) | Texte libre (max 50 caractères) |  |  | Oui |  |
-| role_utilisateur | Rôle applicatif (droits). | VARCHAR(50) | Enum: ADMIN \| CHEF_PROJET \| MEMBRE | NOT NULL; CHECK IN (ADMIN, CHEF_PROJET, MEMBRE) |  | Non | CHEF_PROJET |
-| date_inscription | Date d’inscription sur la plateforme. | DATE | Date | NOT NULL |  | Non |  |
+| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Exemple |
+|---|---|---|---|---|---|---|
+| id_utilisateur | Identifiant unique de l’utilisateur. | INT | Entier | PRIMARY KEY, AUTO_INCREMENT | PK | 1 |
+| nom_utilisateur | Nom de famille. | VARCHAR(50) | Texte (≤ 50) | NOT NULL |  | NDIAYE |
+| prenom_utilisateur | Prénom. | VARCHAR(50) | Texte (≤ 50) | NOT NULL |  | Dior |
+| email_utilisateur | Email (unique). | VARCHAR(255) | Email (≤ 255) | NOT NULL, UNIQUE |  | dior.ndiaye@example.sn |
+| telephone_utilisateur | Téléphone. | VARCHAR(50) | Texte (≤ 50) | NULL autorisé |  | +221770000000 |
+| role_utilisateur | Rôle applicatif. | VARCHAR(20) | Enum: ADMIN \| CHEF_PROJET \| MEMBRE | NOT NULL, CHECK |  | CHEF_PROJET |
+| date_inscription | Date d’inscription. | DATE | Date | NOT NULL |  | 2026-01-10 |
+
+---
 
 ## Entité `EQUIPE`
 
-**Description :** Regroupe des utilisateurs au sein d’une même équipe de travail.
+**Description :** Regroupe des utilisateurs dans une équipe de travail.
 
 **Règles & contraintes clés :**
-- Clé primaire : `id_equipe`.
+- **PK** : `id_equipe` (AUTO_INCREMENT)
+- **UNIQUE** : `nom_equipe`
 
-| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Nullable | Exemple |
-|---|---|---|---|---|---|---|---|
-| id_equipe | Identifiant unique de l’équipe. | INT | Entier |  | PK | Oui |  |
-| nom_equipe | Nom de l’équipe (unique). | VARCHAR(50) | Texte libre (max 50 caractères) | NOT NULL |  | Non | Programme Santé & Terrain |
-| description | Description courte de l’équipe. | VARCHAR(50) | Texte libre (max 50 caractères) |  |  | Oui |  |
-| date_creation | Date de création de l’équipe. | DATE | Date | NOT NULL |  | Non |  |
+| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Exemple |
+|---|---|---|---|---|---|---|
+| id_equipe | Identifiant unique de l’équipe. | INT | Entier | PRIMARY KEY, AUTO_INCREMENT | PK | 10 |
+| nom_equipe | Nom de l’équipe. | VARCHAR(80) | Texte (≤ 80) | NOT NULL, UNIQUE |  | Programme Santé & Terrain |
+| description | Description de l’équipe. | VARCHAR(255) | Texte (≤ 255) | NULL autorisé |  | Équipe de suivi terrain |
+| date_creation | Date de création. | DATE | Date | NOT NULL |  | 2026-01-01 |
 
-## Entité `APPARTENIR`
+---
 
-**Description :** Association utilisateur↔équipe (N–N) avec date d’affectation.
+## Table d’association `APPARTENIR` (Utilisateur ↔ Équipe)
+
+**Description :** Association **N–N** entre utilisateurs et équipes, avec date d’affectation.
 
 **Règles & contraintes clés :**
-- Clé primaire composite : (id_utilisateur, id_equipe).
-- Références (FK) : `id_utilisateur` → UTILISATEUR(id_utilisateur), `id_equipe` → EQUIPE(id_equipe).
-- Règle : une ligne par paire (via clé primaire composite).
+- **PK composite** : (`id_utilisateur`, `id_equipe`)
+- **FK** : `id_utilisateur` → `UTILISATEUR(id_utilisateur)` ; `id_equipe` → `EQUIPE(id_equipe)`
 
-| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Nullable | Exemple |
-|---|---|---|---|---|---|---|---|
-| id_utilisateur | Utilisateur membre de l’équipe. | INT | Entier |  | PK, FK → UTILISATEUR(id_utilisateur) | Oui |  |
-| id_equipe | Équipe concernée. | INT | Entier |  | PK, FK → EQUIPE(id_equipe) | Oui |  |
-| date_affectation | Date d’affectation. | DATE | Date | NOT NULL |  | Non |  |
+| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Exemple |
+|---|---|---|---|---|---|---|
+| id_utilisateur | Utilisateur membre de l’équipe. | INT | Entier | NOT NULL | PK, FK → UTILISATEUR(id_utilisateur) | 1 |
+| id_equipe | Équipe concernée. | INT | Entier | NOT NULL | PK, FK → EQUIPE(id_equipe) | 10 |
+| date_affectation | Date d’affectation. | DATE | Date | NOT NULL |  | 2026-01-12 |
+
+---
 
 ## Entité `PROJET`
 
-**Description :** Projet porté par une équipe, avec planning, budget, statut et priorité.
+**Description :** Projet porté par une équipe (planning, budget, statut, priorité).
 
 **Règles & contraintes clés :**
-- Clé primaire : `id_projet`.
-- Références (FK) : `id_equipe` → EQUIPE(id_equipe).
-- Règles : budget ≥ 0 ; date_fin_prevue ≥ date_debut ; statut/priorité dans des listes autorisées.
+- **PK** : `id_projet` (AUTO_INCREMENT)
+- **FK** : `id_equipe` → `EQUIPE(id_equipe)`
+- **DEFAULT** : `budget_alloue` = 0
+- **CHECK** : `budget_alloue >= 0`
+- **CHECK** : `date_fin_prevue >= date_debut`
+- **CHECK** : `statut` ∈ {`EN_PLANIFICATION`,`EN_COURS`,`EN_PAUSE`,`TERMINE`}
+- **CHECK** : `priorite` ∈ {`HAUTE`,`MOYENNE`,`BASSE`}
 
-| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Nullable | Exemple |
-|---|---|---|---|---|---|---|---|
-| id_projet | Identifiant unique du projet. | INT | Entier |  | PK | Oui |  |
-| titre_projet | Titre du projet. | VARCHAR(50) | Texte libre (max 50 caractères) | NOT NULL |  | Non | Digitalisation suivi vaccins |
-| description_projet | Description du projet. | VARCHAR(150) | Texte libre (max 150 caractères) | NOT NULL |  | Non |  |
-| date_debut | Date de démarrage. | DATE | Date |  |  | Oui |  |
-| date_fin_prevue | Date de fin prévue. | DATE | Date | CHECK (date_fin_prevue >= date_debut) |  | Oui |  |
-| budget_alloue | Budget alloué (≥ 0). | DECIMAL(15,7) | Montant (nombre décimal) | CHECK (budget_alloue >= 0) |  | Oui | 15000000.00 |
-| statut | Statut du projet. | VARCHAR(50) | Enum: EN_PLANIFICATION \| EN_COURS \| EN_PAUSE \| TERMINE | NOT NULL; CHECK IN (EN_PLANIFICATION, EN_COURS, EN_PAUSE, TERMINE) |  | Non | EN_COURS |
-| priorite | Priorité du projet. | VARCHAR(50) | Enum: HAUTE \| MOYENNE \| BASSE | CHECK IN (HAUTE, MOYENNE, BASSE) |  | Oui |  |
-| id_equipe | Équipe porteuse du projet. | INT | Entier | NOT NULL | FK → EQUIPE(id_equipe) | Non |  |
+| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Exemple |
+|---|---|---|---|---|---|---|
+| id_projet | Identifiant unique du projet. | INT | Entier | PRIMARY KEY, AUTO_INCREMENT | PK | 100 |
+| titre_projet | Titre du projet. | VARCHAR(120) | Texte (≤ 120) | NOT NULL |  | Digitalisation suivi vaccins |
+| description_projet | Description détaillée. | VARCHAR(500) | Texte (≤ 500) | NOT NULL |  | Suivi des activités, reporting et alertes |
+| date_debut | Date de démarrage. | DATE | Date | NOT NULL |  | 2026-01-15 |
+| date_fin_prevue | Date de fin prévue. | DATE | Date | NOT NULL, CHECK (>= date_debut) |  | 2026-03-30 |
+| budget_alloue | Budget alloué. | DECIMAL(15,2) | Montant | NOT NULL, DEFAULT 0, CHECK (>=0) |  | 15000000.00 |
+| statut | Statut du projet. | VARCHAR(20) | Enum autorisée | NOT NULL, CHECK |  | EN_COURS |
+| priorite | Priorité du projet. | VARCHAR(10) | Enum autorisée | NOT NULL, CHECK |  | HAUTE |
+| id_equipe | Équipe porteuse. | INT | Entier | NOT NULL | FK → EQUIPE(id_equipe) | 10 |
+
+---
 
 ## Entité `TACHE`
 
-**Description :** Tâche rattachée à un projet, avec statut, priorité et % d’avancement.
+**Description :** Tâche rattachée à un projet (statut, priorité, avancement).
 
 **Règles & contraintes clés :**
-- Clé primaire : `id_tache`.
-- Références (FK) : `id_projet` → PROJET(id_projet).
-- Règles : avancement 0..100 ; statut/priorité dans des listes autorisées ; cohérence des dates si renseignées.
+- **PK** : `id_tache` (AUTO_INCREMENT)
+- **FK** : `id_projet` → `PROJET(id_projet)`
+- **DEFAULT** : `pourcentage_avancement` = 0
+- **CHECK** : `pourcentage_avancement` entre 0 et 100
+- **CHECK** : cohérence des dates (si les deux dates existent, fin ≥ début)
+- **CHECK** : `statut` ∈ {`A_FAIRE`,`EN_COURS`,`TERMINE`,`BLOQUE`}
+- **CHECK** : `priorite` ∈ {`HAUTE`,`MOYENNE`,`BASSE`}
 
-| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Nullable | Exemple |
-|---|---|---|---|---|---|---|---|
-| id_tache | Identifiant unique de la tâche. | INT | Entier |  | PK | Oui |  |
-| titre_tache | Titre de la tâche. | VARCHAR(50) | Texte libre (max 50 caractères) | NOT NULL |  | Non | Configurer modèle de données |
-| description_tache | Description de la tâche. | VARCHAR(150) | Texte libre (max 150 caractères) |  |  | Oui |  |
-| date_debut_prevue | Date de début prévue. | DATE | Date |  |  | Oui |  |
-| date_fin_prevue | Date de fin prévue. | DATE | Date |  |  | Oui |  |
-| pourcentage_avancement | Avancement en % (0–100). | INT | Entier | NOT NULL; CHECK (pourcentage_avancement BETWEEN 0 AND 100) |  | Non | 35 |
-| priorite | Priorité de la tâche. | VARCHAR(50) | Enum: HAUTE \| MOYENNE \| BASSE | CHECK IN (HAUTE, MOYENNE, BASSE) |  | Oui |  |
-| id_projet | Projet parent. | INT | Entier | NOT NULL | FK → PROJET(id_projet) | Non |  |
-| statut | Statut de la tâche. | VARCHAR(20) | Enum: A_FAIRE \| EN_COURS \| TERMINE \| BLOQUE | NOT NULL; CHECK IN (A_FAIRE, EN_COURS, TERMINE, BLOQUE) |  | Non | EN_COURS |
+| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Exemple |
+|---|---|---|---|---|---|---|
+| id_tache | Identifiant unique de la tâche. | INT | Entier | PRIMARY KEY, AUTO_INCREMENT | PK | 200 |
+| titre_tache | Titre de la tâche. | VARCHAR(120) | Texte (≤ 120) | NOT NULL |  | Modéliser le MPD |
+| description_tache | Description de la tâche. | VARCHAR(500) | Texte (≤ 500) | NULL autorisé |  | Définir types, contraintes, index |
+| date_debut_prevue | Début prévu. | DATE | Date | NULL autorisé |  | 2026-01-20 |
+| date_fin_prevue | Fin prévue. | DATE | Date | NULL autorisé, CHECK (si début renseigné alors fin ≥ début) |  | 2026-01-25 |
+| pourcentage_avancement | Avancement (%) | INT | Entier | NOT NULL, DEFAULT 0, CHECK (0..100) |  | 35 |
+| statut | Statut de la tâche. | VARCHAR(20) | Enum autorisée | NOT NULL, CHECK |  | EN_COURS |
+| priorite | Priorité de la tâche. | VARCHAR(10) | Enum autorisée | NOT NULL, CHECK |  | MOYENNE |
+| id_projet | Projet parent. | INT | Entier | NOT NULL | FK → PROJET(id_projet) | 100 |
 
-## Entité `ASSIGNER`
+---
 
-**Description :** Association utilisateur↔tâche (N–N) avec date et rôle dans la tâche.
+## Table d’association `ASSIGNER` (Utilisateur ↔ Tâche)
+
+**Description :** Association **N–N** entre utilisateurs et tâches, avec date d’affectation et rôle dans la tâche.
 
 **Règles & contraintes clés :**
-- Clé primaire composite : (id_utilisateur, id_tache).
-- Références (FK) : `id_utilisateur` → UTILISATEUR(id_utilisateur), `id_tache` → TACHE(id_tache).
-- Règle : une ligne par paire (via clé primaire composite).
+- **PK composite** : (`id_utilisateur`, `id_tache`)
+- **FK** : `id_utilisateur` → `UTILISATEUR(id_utilisateur)` ; `id_tache` → `TACHE(id_tache)`
 
-| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Nullable | Exemple |
-|---|---|---|---|---|---|---|---|
-| id_utilisateur | Utilisateur assigné. | INT | Entier |  | PK, FK → UTILISATEUR(id_utilisateur) | Oui |  |
-| id_tache | Tâche concernée. | INT | Entier |  | PK, FK → TACHE(id_tache) | Oui |  |
-| date_affectation | Date d’assignation. | DATE | Date | NOT NULL |  | Non |  |
-| role_tache | Rôle dans la tâche (ex: Responsable, Contributeur). | VARCHAR(50) | Texte libre (max 50 caractères) | NOT NULL |  | Non |  |
+| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Exemple |
+|---|---|---|---|---|---|---|
+| id_utilisateur | Utilisateur assigné. | INT | Entier | NOT NULL | PK, FK → UTILISATEUR(id_utilisateur) | 1 |
+| id_tache | Tâche concernée. | INT | Entier | NOT NULL | PK, FK → TACHE(id_tache) | 200 |
+| date_affectation | Date d’assignation. | DATE | Date | NOT NULL |  | 2026-01-20 |
+| role_tache | Rôle dans la tâche. | VARCHAR(50) | Texte (≤ 50) | NOT NULL |  | Responsable |
+
+---
 
 ## Entité `ACTIVITE`
 
-**Description :** Journal des actions/événements (logs) réalisés sur les tâches.
+**Description :** Journal (logs) des actions réalisées sur les tâches.
 
 **Règles & contraintes clés :**
-- Clé primaire : `id_activite`.
-- Références (FK) : `id_utilisateur` → UTILISATEUR(id_utilisateur), `id_tache` → TACHE(id_tache).
-- Règle : type_activite dans une liste autorisée ; toujours rattachée à un utilisateur et une tâche.
+- **PK** : `id_activite` (AUTO_INCREMENT)
+- **FK** : `id_utilisateur` → `UTILISATEUR(id_utilisateur)` ; `id_tache` → `TACHE(id_tache)`
+- **CHECK** : `type_activite` ∈ {`COMMENTAIRE`,`MAJ_STATUT`,`MAJ_AVANCEMENT`,`AJOUT_DOCUMENT`,`REASSIGNATION`}
 
-| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Nullable | Exemple |
-|---|---|---|---|---|---|---|---|
-| id_activite | Identifiant unique de l’activité/log. | INT | Entier |  | PK | Oui |  |
-| action_commentaire | Commentaire / description d’action. | VARCHAR(300) | Texte libre (max 300 caractères) |  |  | Oui |  |
-| date_heure | Date et heure. | DATETIME | Date & heure | NOT NULL |  | Non |  |
-| type_activite | Type d’activité. | VARCHAR(50) | Enum: COMMENTAIRE \| MAJ_STATUT \| MAJ_AVANCEMENT \| AJOUT_DOCUMENT \| REASSIGNATION | NOT NULL; CHECK IN (COMMENTAIRE, MAJ_STATUT, MAJ_AVANCEMENT, AJOUT_DOCUMENT, REASSIGNATION) |  | Non |  |
-| id_utilisateur | Auteur. | INT | Entier | NOT NULL | FK → UTILISATEUR(id_utilisateur) | Non |  |
-| id_tache | Tâche concernée. | INT | Entier | NOT NULL | FK → TACHE(id_tache) | Non |  |
+| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Exemple |
+|---|---|---|---|---|---|---|
+| id_activite | Identifiant unique de l’activité. | INT | Entier | PRIMARY KEY, AUTO_INCREMENT | PK | 900 |
+| contenu | Commentaire / action (texte). | VARCHAR(300) | Texte (≤ 300) | NULL autorisé |  | Statut passé à EN_COURS |
+| date_heure | Date et heure. | DATETIME | Date & heure | NOT NULL |  | 2026-01-20 14:30:00 |
+| type_activite | Type d’action. | VARCHAR(30) | Enum autorisée | NOT NULL, CHECK |  | MAJ_STATUT |
+| id_utilisateur | Auteur. | INT | Entier | NOT NULL | FK → UTILISATEUR(id_utilisateur) | 1 |
+| id_tache | Tâche concernée. | INT | Entier | NOT NULL | FK → TACHE(id_tache) | 200 |
+
+---
 
 ## Entité `DOCUMENT`
 
-**Description :** Document téléversé, rattaché à une tâche OU à un projet, et à un utilisateur auteur.
+**Description :** Document téléversé, rattaché à **une tâche OU un projet** (règle XOR), et à un utilisateur auteur.
 
 **Règles & contraintes clés :**
-- Clé primaire : `id_document`.
-- Références (FK) : `id_tache` → TACHE(id_tache), `id_projet` → PROJET(id_projet), `id_utilisateur` → UTILISATEUR(id_utilisateur).
-- Règle : rattachement exclusif à un PROJET OU une TÂCHE (pas les deux).
+- **PK** : `id_document` (AUTO_INCREMENT)
+- **FK** : `id_tache` → `TACHE(id_tache)` ; `id_projet` → `PROJET(id_projet)` ; `id_utilisateur` → `UTILISATEUR(id_utilisateur)`
+- **CHECK (XOR)** : un document est lié **soit** à une tâche **soit** à un projet (pas les deux) :  
+  `CHECK ( (id_tache IS NULL) <> (id_projet IS NULL) )`
 
-| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Nullable | Exemple |
-|---|---|---|---|---|---|---|---|
-| id_document | Identifiant unique du document. | INT | Entier |  | PK | Oui |  |
-| nom_fichier | Nom du fichier. | VARCHAR(50) | Texte libre (max 50 caractères) | NOT NULL |  | Non | schema_mcd.png |
-| type_fichier | Type/MIME ou extension. | VARCHAR(50) | Texte libre (max 50 caractères) |  |  | Oui |  |
-| date_upload | Date et heure de téléversement. | DATETIME | Date & heure |  |  | Oui |  |
-| chemin_fichier | Chemin/URI de stockage. | VARCHAR(50) | Texte libre (max 50 caractères) | NOT NULL |  | Non | /files/2026/01/schema_mcd.png |
-| id_tache | Tâche rattachée (optionnel). | INT | Entier |  | FK → TACHE(id_tache) | Oui |  |
-| id_projet | Projet rattaché (optionnel). | INT | Entier |  | FK → PROJET(id_projet) | Oui |  |
-| id_utilisateur | Utilisateur auteur du téléversement. | INT | Entier | NOT NULL | FK → UTILISATEUR(id_utilisateur) | Non |  |
-| taille_octets | Taille du fichier en octets (optionnel). | BIGINT | Entier (grande capacité) |  |  | Oui |  |
-| (Règle table) | Un document doit être rattaché à un projet OU à une tâche (pas les deux). |  |  | CHECK ((id_tache IS NULL) <> (id_projet IS NULL)) |  |  | id_tache=101, id_projet=NULL |
+| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Exemple |
+|---|---|---|---|---|---|---|
+| id_document | Identifiant unique du document. | INT | Entier | PRIMARY KEY, AUTO_INCREMENT | PK | 500 |
+| nom_fichier | Nom du fichier. | VARCHAR(255) | Texte (≤ 255) | NOT NULL |  | schema_mcd.png |
+| type_fichier | Type/extension. | VARCHAR(80) | Texte (≤ 80) | NULL autorisé |  | image/png |
+| taille_octets | Taille du fichier en octets. | BIGINT | Entier | NULL autorisé |  | 204800 |
+| date_upload | Date et heure d’upload. | DATETIME | Date & heure | NOT NULL |  | 2026-01-20 15:10:00 |
+| chemin_fichier | Chemin/URI de stockage. | VARCHAR(500) | Texte (≤ 500) | NOT NULL |  | /files/schema_mcd.png |
+| id_tache | Tâche rattachée (optionnel). | INT | Entier | NULL autorisé | FK → TACHE(id_tache) | 200 |
+| id_projet | Projet rattaché (optionnel). | INT | Entier | NULL autorisé | FK → PROJET(id_projet) | NULL |
+| id_utilisateur | Auteur du téléversement. | INT | Entier | NOT NULL | FK → UTILISATEUR(id_utilisateur) | 1 |
+
+---
 
 ## Entité `NOTIFICATION`
 
 **Description :** Notification envoyée à un utilisateur (assignation, changement de statut, etc.).
 
 **Règles & contraintes clés :**
-- Clé primaire : `id_notification`.
-- Références (FK) : `id_utilisateur` → UTILISATEUR(id_utilisateur).
-- Règle : statut de lecture dans {LU, NON_LU}.
+- **PK** : `id_notification` (AUTO_INCREMENT)
+- **FK** : `id_utilisateur` → `UTILISATEUR(id_utilisateur)`
+- **CHECK** : `statut` ∈ {`LU`, `NON_LU`}
 
-| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Nullable | Exemple |
-|---|---|---|---|---|---|---|---|
-| id_notification | Identifiant unique de notification. | INT | Entier |  | PK | Oui |  |
-| message | Message affiché à l’utilisateur. | VARCHAR(400) | Texte libre (max 400 caractères) | NOT NULL |  | Non |  |
-| type_notification | Type de notification. | VARCHAR(50) | Texte libre (max 50 caractères) | NOT NULL |  | Non |  |
-| statut | Statut de lecture. | VARCHAR(50) | Enum: LU \| NON_LU | NOT NULL; CHECK IN (LU, NON_LU) |  | Non | NON_LU |
-| date_heure | Date et heure d’émission. | DATETIME | Date & heure | NOT NULL |  | Non |  |
-| id_utilisateur | Destinataire. | INT | Entier | NOT NULL | FK → UTILISATEUR(id_utilisateur) | Non |  |
+| Attribut | Description | Type | Domaine | Contraintes | Clé (PK/FK) | Exemple |
+|---|---|---|---|---|---|---|
+| id_notification | Identifiant unique de la notification. | INT | Entier | PRIMARY KEY, AUTO_INCREMENT | PK | 700 |
+| message | Message affiché. | VARCHAR(400) | Texte (≤ 400) | NOT NULL |  | Nouvelle tâche assignée |
+| type_notification | Type de notification. | VARCHAR(50) | Texte (≤ 50) | NOT NULL |  | ASSIGNATION |
+| statut | Statut de lecture. | VARCHAR(10) | Enum: LU \| NON_LU | NOT NULL, CHECK |  | NON_LU |
+| date_heure | Date et heure d’émission. | DATETIME | Date & heure | NOT NULL |  | 2026-01-20 16:00:00 |
+| id_utilisateur | Destinataire. | INT | Entier | NOT NULL | FK → UTILISATEUR(id_utilisateur) | 1 |

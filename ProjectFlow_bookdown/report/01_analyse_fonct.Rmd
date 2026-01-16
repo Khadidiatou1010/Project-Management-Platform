@@ -1,4 +1,4 @@
-# Analyse fonctionnelle du système — ProjectFlow
+# Analyse fonctionnelle du système
 
 ## Contexte
 

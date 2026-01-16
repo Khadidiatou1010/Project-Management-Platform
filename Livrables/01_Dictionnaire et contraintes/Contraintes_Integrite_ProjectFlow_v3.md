@@ -1,11 +1,10 @@
-# Contraintes d’intégrité
+# Contraintes d’intégrité — ProjectFlow
 
 Cette partie liste les contraintes d’intégrité du MPD. Les tableaux ci-dessous sont conçus pour un affichage stable (GitHub, VS Code, Obsidian, etc.).
 
-## Définition
+## Rappel (1 paragraphe)
 
 Les contraintes d’intégrité sont des règles appliquées par le SGBD pour empêcher l’enregistrement de données incohérentes. Elles couvrent l’intégrité d’entité (chaque ligne est unique via une clé primaire), l’intégrité référentielle (les clés étrangères ne peuvent pointer que vers des enregistrements existants), l’intégrité de domaine (valeurs obligatoires, unicité, plages/ensembles autorisés) et l’intégrité métier (règles propres au contexte, comme la cohérence des dates ou l’exclusivité « projet OU tâche » pour un document). En cas de violation, l’insertion ou la mise à jour est refusée.
-
 
 ## Tableau global des contraintes
 
@@ -134,6 +133,16 @@ Les contraintes d’intégrité sont des règles appliquées par le SGBD pour em
 | Domaine / Métier | CHECK | `CONSTRAINT ck_projet_statut CHECK (statut IN ('EN_PLANIFICATION','EN_COURS','EN_PAUSE','TERMINE'))` | Limite les statuts de projet à une liste autorisée. |
 | Domaine / Métier | CHECK | `CONSTRAINT ck_projet_priorite CHECK (priorite IN ('HAUTE','MOYENNE','BASSE'))` | Limite les priorités de projet à une liste autorisée. |
 | Référentielle | FOREIGN KEY | `CONSTRAINT fk_projet_equipe FOREIGN KEY (id_equipe) REFERENCES equipe(id_equipe)` | Empêche projet.id_equipe de référencer une valeur inexistante (doit exister dans equipe(id_equipe)). |
+
+### `PROJET_MEMBRE`
+
+| Type d’intégrité | Mécanisme | Contrainte | Sens |
+|---|---|---|---|
+| Domaine | NOT NULL | `NOT NULL sur: date_affectation, id_projet, id_utilisateur, role_projet` | Champs obligatoires (valeur requise). |
+| Entité | PRIMARY KEY | `PRIMARY KEY (id_projet, id_utilisateur)` | Identifie de façon unique chaque enregistrement. |
+| Domaine / Métier | CHECK | `CONSTRAINT ck_pm_role CHECK (role_projet IN ('CHEF_PROJET','MEMBRE'))` | Limite les rôles dans un projet à une liste autorisée. |
+| Référentielle | FOREIGN KEY | `CONSTRAINT fk_pm_projet FOREIGN KEY (id_projet) REFERENCES projet(id_projet)` | Empêche projet_membre.id_projet de référencer une valeur inexistante (doit exister dans projet(id_projet)). |
+| Référentielle | FOREIGN KEY | `CONSTRAINT fk_pm_user FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur)` | Empêche projet_membre.id_utilisateur de référencer une valeur inexistante (doit exister dans utilisateur(id_utilisateur)). |
 
 ### `TACHE`
 

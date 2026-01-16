@@ -1,7 +1,2 @@
-book_filename: "ProjectFlow_Rapport"
-output_dir: "docs"
+book_filename: "ProjectFlow"
 delete_merged_file: true
-new_session: true
-language:
-  ui:
-    chapter_name: "Chapitre "
