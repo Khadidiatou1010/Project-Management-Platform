@@ -94,11 +94,20 @@ Le modèle couvre les fonctionnalités imposées par l’énoncé :
 ├── 06_Requetes_SQL/
 │   ├── Requetes_SQL.sql
 │   └── Requetes_SQL.pdf
-├── 07_Annexes/
+├──07_Maquettes_Figma/
+├── README_Maquettes.md
+└── captures/
+    ├── ecran_01_connexion.png
+    ├── ecran_02_tableau_de_bord.png
+    ├── ecran_03_liste_projets.png
+    ├── ecran_04_detail_projet.png
+    ├── ecran_05_taches_projet.png
+    └── ...
+├── 08_Annexes/
 │   ├── SQL_Dialectes_CheatSheet.md
 │   ├── Conventions_Nommage.md
 │   └── Checklist_Final.md
-├── 08_Ameliorations_Extensions/
+├── 09_Ameliorations_Extensions/
 │   └── Ameliorations.pdf
 └── MVP_optional/                 (annexe si autorisée)
     ├── schema_postgresql_mvp.sql
