@@ -148,6 +148,9 @@ Le modèle couvre les fonctionnalités imposées par l’énoncé :
 ### `06_Requetes_SQL/`
 
 * `Requetes_SQL.sql` : 30 requêtes (10 simples / 10 intermédiaires / 10 avancées), cohérentes avec le MLD/MPD. 
+### `07_Maquettes_Figma_Interface_Utilisateur/`
+
+* Capture de l'interface utilisaterur : Maquettes des écrans de l’application, fournies à titre illustratif.
 
 ### `08_Ameliorations_Extensions/`
 
@@ -182,7 +185,18 @@ Le modèle couvre les fonctionnalités imposées par l’énoncé :
 * Statuts/priorités : valeurs cohérentes et documentées dans le dictionnaire.
 
 ---
+## 🔗 Lien vers la maquette Figma
 
+La maquette interactive de la plateforme de gestion de projets est disponible en ligne via Figma :
+
+👉 https://www.figma.com/make/AtIXlJaRMhyH1cMLKPooTY/Project-Management-Platform-UI
+
+Cette maquette permet de visualiser l’enchaînement des écrans, les interactions prévues
+et la logique fonctionnelle du système.
+
+⚠️ Cette maquette est fournie à titre illustratif et ne constitue pas une implémentation
+fonctionnelle de l’application.
+---
 ## 📌 Notes & limites
 
 * Le sujet impose la modélisation des utilisateurs/équipes/projets/tâches/activités/documents (+ notifications en option). 
