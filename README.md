@@ -97,12 +97,12 @@ Le modèle couvre les fonctionnalités imposées par l’énoncé :
 ├──07_Maquettes_Figma/
 ├── README_Maquettes.md
 └── captures/
-    ├── ecran_01_connexion.png
-    ├── ecran_02_tableau_de_bord.png
-    ├── ecran_03_liste_projets.png
-    ├── ecran_04_detail_projet.png
-    ├── ecran_05_taches_projet.png
-    └── ...
+│    ├── ecran_01_connexion.png
+│    ├── ecran_02_tableau_de_bord.png
+│    ├── ecran_03_liste_projets.png
+│    ├── ecran_04_detail_projet.png
+│    ├── ecran_05_taches_projet.png
+│    └── ...
 ├── 08_Annexes/
 │   ├── SQL_Dialectes_CheatSheet.md
 │   ├── Conventions_Nommage.md
