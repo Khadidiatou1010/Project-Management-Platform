@@ -2,7 +2,7 @@
 
 > **Équipe** : Dior Mbengue, Khadidiatou Coulibaly, Seunkam Pahane Kenrencia Dyvana
 > **Module** : Base de données 1 (ENSAE Dakar), dispensé par M. Baye Demba Diack 
-> **Livrable** : Conception, modélisation et documentation d’une base de données complète (pas d’implémentation logicielle requise pour le rendu officiel). 
+> **Livrable** : Conception, modélisation, documentation d’une base de données complète (pas d’implémentation logicielle requise pour le rendu officiel) et maquettes Figma. 
 
 ## 🎯 Objectif
 
@@ -59,7 +59,7 @@ Le modèle couvre les fonctionnalités imposées par l’énoncé :
 
   * Avantages : contraintes `CHECK`, intégrité, types et conventions robustes.
 * **Requêtes SQL** : rédigées majoritairement en **SQL standard** (compatibles MySQL/PostgreSQL à quelques détails près).
-* Un mémo “dialectes” est disponible dans `07_SQL_Dialectes_CheatSheet.md` pour comprendre les différences (`SERIAL` vs `AUTO_INCREMENT`, `LIMIT/OFFSET`, etc.).
+* Un mémo “dialectes” est disponible dans `08_SQL_Dialectes_CheatSheet.md` pour comprendre les différences (`SERIAL` vs `AUTO_INCREMENT`, `LIMIT/OFFSET`, etc.).
 
 ---
 
@@ -147,7 +147,8 @@ Le modèle couvre les fonctionnalités imposées par l’énoncé :
 
 ### `06_Requetes_SQL/`
 
-* `Requetes_SQL.sql` : 30 requêtes (10 simples / 10 intermédiaires / 10 avancées), cohérentes avec le MLD/MPD. 
+* `Requetes_SQL.sql` : 30 requêtes (10 simples / 10 intermédiaires / 10 avancées), cohérentes avec le MLD/MPD.
+
 ### `07_Maquettes_Figma_Interface_Utilisateur/`
 
 * Capture de l'interface utilisaterur : Maquettes des écrans de l’application, fournies à titre illustratif.
