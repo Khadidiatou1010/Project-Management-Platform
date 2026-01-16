@@ -195,7 +195,7 @@ La maquette interactive de la plateforme de gestion de projets est disponible en
 Cette maquette permet de visualiser l’enchaînement des écrans, les interactions prévues
 et la logique fonctionnelle du système.
 
-⚠️ Cette maquette est fournie à titre illustratif et ne constitue pas une implémentation
+### ⚠️ Cette maquette est fournie à titre illustratif et ne constitue pas une implémentation
 fonctionnelle de l’application.
 ---
 ## 📌 Notes & limites
